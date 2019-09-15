@@ -13,16 +13,37 @@ namespace FundosInvestimento.Infra.Data.Contexto
         {
         }
 
+        public FundosInvestimentoContext()
+        {
+        }
+
         public DbSet<Fundos> Fundos { get; set; }
         public DbSet<AplicacaoResgate> AplicacaoResgate { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder molderBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            molderBuilder.ForSqlServerUseIdentityColumns();
-            molderBuilder.HasDefaultSchema("FundosInvestimento");
+            modelBuilder.ForSqlServerUseIdentityColumns();
+            modelBuilder.HasDefaultSchema("FundosInvestimento");
 
-            ConfiguraFundos(molderBuilder);
-            ConfiguraAplicacaoResgate(molderBuilder);
+            //molderBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //molderBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //molderBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            //molderBuilder.Properties()
+            //    .Where(p => p.Name == p.ReflectedType.Name + "Id")
+            //    .Configure(p => p.IsKey());
+
+            //molderBuilder.Properties<string>()
+            //    .Configure(p => p.HasColumnType("varchar"));
+
+            //molderBuilder.Properties<string>()
+            //    .Configure(p => p.HasMaxLength(100));
+
+            //modelBuilder.Configurations.Add(new FundosConfiguration());
+            //modelBuilder.Configurations.Add(new AplicacaoResgateConfiguration());
+
+            ConfiguraFundos(modelBuilder);
+            ConfiguraAplicacaoResgate(modelBuilder);
         }
 
         private void ConfiguraFundos(ModelBuilder modelBuilder)
@@ -32,8 +53,8 @@ namespace FundosInvestimento.Infra.Data.Contexto
                 etd.ToTable("Fundos");
                 etd.HasKey(c => c.FundosId).HasName("FundosId");
                 etd.Property(c => c.FundosId).HasColumnName("FundosId").ValueGeneratedOnAdd();
-                etd.Property(c => c.Nome).HasColumnName("Nome").HasMaxLength(100);
-                etd.Property(c => c.Cnpj).HasColumnName("Cnpj").HasMaxLength(100);
+                etd.Property(c => c.Nome).HasColumnName("Nome").HasMaxLength(150);
+                etd.Property(c => c.Cnpj).HasColumnName("Cnpj").HasMaxLength(14);
                 etd.Property(c => c.InvestimentoInicial).HasColumnName("InvestimentoInicial").HasColumnType("decimal(18,2)");
             });
         }
@@ -50,7 +71,7 @@ namespace FundosInvestimento.Infra.Data.Contexto
                 etd.Property(c => c.FundosId).HasColumnName("FundosId").HasMaxLength(100);
                 etd.Property(c => c.Cpf).HasColumnName("Cpf").HasMaxLength(11);
                 etd.Property(c => c.ValorMovimentacao).HasColumnName("ValorMovimentacao").HasColumnType("decimal(18,2)");
-                etd.Property(c => c.DataMovimentacao).HasColumnName("DataMovimentacao");
+                etd.Property(c => c.DataMovimentacao).HasColumnName("DataMovimentacao").HasColumnType("datetime");
             });
         }
     }
