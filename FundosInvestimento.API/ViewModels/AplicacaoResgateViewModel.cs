@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FundosInvestimento.API.ViewModels
 {
-    public class AplicacaoResgateViewModel : IdentityUser
+    public class AplicacaoResgateViewModel
     {
         public Guid AplicacaoResgateId { get; set; }
         public TpMovimentacao TipoMovimentacao { get; set; }

@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FundosInvestimento.API.Controllers
 {
-    [Route("api/[Controller]")]
-    [Authorize()]
+    [ApiController]
+    [Route("api/[controller]")]
+    //[Authorize()]
     public class FundosInvestimentoController : ControllerBase
     {
         //Fazer a injeção do serviço no repositório
@@ -28,7 +29,7 @@ namespace FundosInvestimento.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("[Action]")]
+        [HttpPost("[action]")]
         public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] FundosViewModel fundos)
         {
             InsereFundosInvestimentoResponse response = new InsereFundosInvestimentoResponse();
@@ -38,7 +39,7 @@ namespace FundosInvestimento.API.Controllers
                 if (ModelState.IsValid)
                 {
                     var fundosDomain = _mapper.Map<FundosViewModel, Fundos>(fundos);
-                    if (_fundosApp != null)
+                    if (fundosDomain != null)
                     {
                         _fundosApp.Add(fundosDomain);
                         response.mensagem = "Fundos de Investimento inserido com sucesso!";

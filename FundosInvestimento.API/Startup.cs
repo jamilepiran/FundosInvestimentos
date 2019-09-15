@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using AutoMapper;
+using FundosInvestimento.API.Models;
 using FundosInvestimento.API.ViewModels;
 using FundosInvestimento.Application;
 using FundosInvestimento.Application.Interface;
@@ -34,12 +35,6 @@ namespace FundosInvestimento.API
         {
             services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
-            //Registra o gerador Swagger definindo um ou mais documentos Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
-            });
-
             //Dependency Injection
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFundosAppService, FundosAppService>();
@@ -50,16 +45,27 @@ namespace FundosInvestimento.API
             services.AddSingleton<IAplicacaoResgateService, AplicacaoResgateService>();
             services.AddTransient<IAplicacaoResgateRepository, AplicacaoResgateRepository>();
 
-            services.AddIdentity<FundosViewModel, IdentityRole>()
-                .AddEntityFrameworkStores<FundosInvestimentoContext>()
-                .AddDefaultTokenProviders();
+            //services.AddIdentity<FundosViewModel, IdentityRole>()
+            //    .AddEntityFrameworkStores<FundosInvestimentoContext>()
+            //    .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddIdentity<AplicacaoResgateViewModel, IdentityRole>()
+            //    .AddEntityFrameworkStores<FundosInvestimentoContext>()
+            //    .AddDefaultTokenProviders();
 
-            //Add framework services.
-            //services.AddMvc().AddControllersAsServices();      // <---- Super important
+            //Registra o gerador Swagger definindo um ou mais documentos Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
+            });
+
+            services.AddMvcCore()
+                    .AddApiExplorer()
+                    .AddJsonFormatters()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //AutoMapper
+
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<FundosViewModel, Fundos>();
@@ -68,7 +74,6 @@ namespace FundosInvestimento.API
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
             //AutoMapper
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,15 +83,8 @@ namespace FundosInvestimento.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days.You may want to change this for
-                // production scenarios, see https://aka.ms/aspnetcore-hsts.
-               app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
+              
+            app.UseMvcWithDefaultRoute();
 
             //Habilita o middleware para servir o Swagger gerado com um endpoint JSON
             app.UseSwagger();
