@@ -21,7 +21,7 @@ namespace FundosInvestimento.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FundosInvestimentoContext>(opt =>
-                opt.UseInMemoryDatabase("FundosInvestimento"));
+                opt.UseSqlServer("FundosInvestimento"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
