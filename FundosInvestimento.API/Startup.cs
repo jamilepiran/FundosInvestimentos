@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace FundosInvestimento.API
 {
@@ -24,10 +25,10 @@ namespace FundosInvestimento.API
             services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -48,6 +49,13 @@ namespace FundosInvestimento.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //Habilita o middleware para servir o Swagger gerado com um endpoint JSON
+            app.UseSwagger();
+            //Habilita o middleware para servir o swagger-ui(HTML, JS, CSS, etc)
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FundosInvestimento V1");
+            });
         }
     }
 }
