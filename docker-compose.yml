@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  FundosInvestimento.API:
+    image: fundosinvestimento-release
+    container_name: fundosinvestimento-release
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: FundosInvestimento.API/Dockerfile
+    ports:
+        - '8091:80'
+    volumes:
+        - './upload:/var/temp/FundosInvestimento'
+        - './temporario:/var/temp/'
