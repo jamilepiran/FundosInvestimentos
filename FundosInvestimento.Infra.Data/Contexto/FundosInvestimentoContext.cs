@@ -13,9 +13,9 @@ namespace FundosInvestimento.Infra.Data.Contexto
         {
         }
 
-        public FundosInvestimentoContext()
-        {
-        }
+        //public FundosInvestimentoContext()
+        //{
+        //}
 
         public DbSet<Fundos> Fundos { get; set; }
         public DbSet<AplicacaoResgate> AplicacaoResgate { get; set; }
