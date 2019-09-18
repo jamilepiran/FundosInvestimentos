@@ -4,6 +4,7 @@ using System.Text;
 using FundosInvestimento.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using NJsonSchema.Infrastructure;
 
 namespace FundosInvestimento.Infra.Data.Contexto
 {
@@ -13,9 +14,9 @@ namespace FundosInvestimento.Infra.Data.Contexto
         {
         }
 
-        //public FundosInvestimentoContext()
-        //{
-        //}
+        public FundosInvestimentoContext()
+        {
+        }
 
         public DbSet<Fundos> Fundos { get; set; }
         public DbSet<AplicacaoResgate> AplicacaoResgate { get; set; }
@@ -25,27 +26,11 @@ namespace FundosInvestimento.Infra.Data.Contexto
             modelBuilder.ForSqlServerUseIdentityColumns();
             modelBuilder.HasDefaultSchema("FundosInvestimento");
 
-            //molderBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //molderBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            //molderBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-
-            //molderBuilder.Properties()
-            //    .Where(p => p.Name == p.ReflectedType.Name + "Id")
-            //    .Configure(p => p.IsKey());
-
-            //molderBuilder.Properties<string>()
-            //    .Configure(p => p.HasColumnType("varchar"));
-
-            //molderBuilder.Properties<string>()
-            //    .Configure(p => p.HasMaxLength(100));
-
-            //modelBuilder.Configurations.Add(new FundosConfiguration());
-            //modelBuilder.Configurations.Add(new AplicacaoResgateConfiguration());
-
             ConfiguraFundos(modelBuilder);
             ConfiguraAplicacaoResgate(modelBuilder);
         }
 
+        //Mapeando as entidades com Fluent API
         private void ConfiguraFundos(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Fundos>(etd =>
@@ -53,25 +38,26 @@ namespace FundosInvestimento.Infra.Data.Contexto
                 etd.ToTable("Fundos");
                 etd.HasKey(c => c.FundosId).HasName("FundosId");
                 etd.Property(c => c.FundosId).HasColumnName("FundosId").ValueGeneratedOnAdd();
-                etd.Property(c => c.Nome).HasColumnName("Nome").HasMaxLength(150);
-                etd.Property(c => c.Cnpj).HasColumnName("Cnpj").HasMaxLength(14);
+                etd.Property(c => c.Nome).HasColumnName("Nome").HasColumnType("varchar(150)").HasMaxLength(150);
+                etd.Property(c => c.Cnpj).HasColumnName("Cnpj").HasColumnType("varchar(14)").HasMaxLength(14);
                 etd.Property(c => c.InvestimentoInicial).HasColumnName("InvestimentoInicial").HasColumnType("decimal(18,2)");
             });
         }
 
-
+        //Mapeando as entidades com Fluent API
         private void ConfiguraAplicacaoResgate(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AplicacaoResgate>(etd =>
             {
                 etd.ToTable("AplicacaoResgate");
-                etd.HasKey(c => c.AplicacaoResgateId).HasName("AplicacaoResgateId");
-                etd.Property(c => c.AplicacaoResgateId).HasColumnName("AplicacaoResgateId").ValueGeneratedOnAdd();
-                etd.Property(c => c.TipoMovimentacao).HasColumnName("TipoMovimentacao").HasConversion(v => v.ToString(), v => (TpMovimentacao)Enum.Parse(typeof(TpMovimentacao), v));
-                etd.Property(c => c.FundosId).HasColumnName("FundosId").HasMaxLength(100);
-                etd.Property(c => c.Cpf).HasColumnName("Cpf").HasMaxLength(11);
-                etd.Property(c => c.ValorMovimentacao).HasColumnName("ValorMovimentacao").HasColumnType("decimal(18,2)");
-                etd.Property(c => c.DataMovimentacao).HasColumnName("DataMovimentacao").HasColumnType("datetime");
+                etd.HasKey(r => r.AplicacaoResgateId).HasName("AplicacaoResgateId");
+                etd.Property(r => r.AplicacaoResgateId).HasColumnName("AplicacaoResgateId").ValueGeneratedOnAdd();
+                etd.Property(r => r.TipoMovimentacao).HasColumnName("TipoMovimentacao").HasColumnType("varchar(1)").HasConversion(v => v.ToString(), v => (TpMovimentacao)Enum.Parse(typeof(TpMovimentacao), v));
+                etd.Property(r => r.FundosId).HasColumnName("FundosId").HasMaxLength(100);
+                etd.Property(r => r.Cpf).HasColumnName("Cpf").HasColumnType("varchar(11)").HasMaxLength(11);
+                etd.Property(r => r.ValorMovimentacao).HasColumnName("ValorMovimentacao").HasColumnType("decimal(18,2)");
+                etd.Property(r => r.DataMovimentacao).HasColumnName("DataMovimentacao").HasColumnType("datetime");
+                etd.HasOne(c => c.Fundos).WithMany(r => r.AplicacaoResgate);
             });
         }
     }

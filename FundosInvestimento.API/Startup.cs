@@ -1,6 +1,7 @@
 ﻿using FundosInvestimento.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,6 @@ namespace FundosInvestimento.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<FundosInvestimentoContext>(opt => opt.UseSqlServer("FundosInvestimento"));
             services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger
@@ -29,6 +29,8 @@ namespace FundosInvestimento.API
             {
                 c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
             });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190918154345_FundosInvestimento.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Repositories\" />
   </ItemGroup>
 

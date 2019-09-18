@@ -28,10 +28,12 @@ namespace FundosInvestimento.Infra.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .HasColumnName("Cpf")
+                        .HasColumnType("varchar(11)")
                         .HasMaxLength(11);
 
                     b.Property<DateTime>("DataMovimentacao")
-                        .HasColumnName("DataMovimentacao");
+                        .HasColumnName("DataMovimentacao")
+                        .HasColumnType("datetime");
 
                     b.Property<Guid>("FundosId")
                         .HasColumnName("FundosId")
@@ -39,7 +41,8 @@ namespace FundosInvestimento.Infra.Data.Migrations
 
                     b.Property<string>("TipoMovimentacao")
                         .IsRequired()
-                        .HasColumnName("TipoMovimentacao");
+                        .HasColumnName("TipoMovimentacao")
+                        .HasColumnType("varchar(1)");
 
                     b.Property<decimal>("ValorMovimentacao")
                         .HasColumnName("ValorMovimentacao")
@@ -47,6 +50,8 @@ namespace FundosInvestimento.Infra.Data.Migrations
 
                     b.HasKey("AplicacaoResgateId")
                         .HasName("AplicacaoResgateId");
+
+                    b.HasIndex("FundosId");
 
                     b.ToTable("AplicacaoResgate");
                 });
@@ -59,7 +64,8 @@ namespace FundosInvestimento.Infra.Data.Migrations
 
                     b.Property<string>("Cnpj")
                         .HasColumnName("Cnpj")
-                        .HasMaxLength(100);
+                        .HasColumnType("varchar(14)")
+                        .HasMaxLength(14);
 
                     b.Property<decimal>("InvestimentoInicial")
                         .HasColumnName("InvestimentoInicial")
@@ -67,12 +73,21 @@ namespace FundosInvestimento.Infra.Data.Migrations
 
                     b.Property<string>("Nome")
                         .HasColumnName("Nome")
-                        .HasMaxLength(100);
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.HasKey("FundosId")
                         .HasName("FundosId");
 
                     b.ToTable("Fundos");
+                });
+
+            modelBuilder.Entity("FundosInvestimento.Domain.Entities.AplicacaoResgate", b =>
+                {
+                    b.HasOne("FundosInvestimento.Domain.Entities.Fundos", "Fundos")
+                        .WithMany("AplicacaoResgate")
+                        .HasForeignKey("FundosId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
