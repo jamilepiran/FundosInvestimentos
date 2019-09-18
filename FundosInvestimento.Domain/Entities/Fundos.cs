@@ -11,6 +11,7 @@ namespace FundosInvestimento.Domain.Entities
         public string Nome { get; set; }
         public string Cnpj { get; set; }
         public decimal InvestimentoInicial { get; set; }
+
         [ForeignKey("FundosId")]
         public ICollection<AplicacaoResgate> AplicacaoResgate { get; set; }
     }

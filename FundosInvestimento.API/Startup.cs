@@ -1,4 +1,7 @@
-﻿using FundosInvestimento.Infra.Data.Contexto;
+﻿using System.Configuration;
+using FundosInvestimento.Application.Interface;
+using FundosInvestimento.Domain.Interfaces.Services;
+using FundosInvestimento.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,17 +15,16 @@ namespace FundosInvestimento.API
 {
     public class Startup
     {
+        public IConfiguration _configuration { get; }
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger
             services.AddSwaggerGen(c =>
@@ -31,6 +33,8 @@ namespace FundosInvestimento.API
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IFundosAppService, FundosAppService>();
+            //services.AddTransient<IFundosAppService, AuthMessageSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

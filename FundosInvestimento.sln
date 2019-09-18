@@ -26,13 +26,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundosInvestimento.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundosInvestimento.Application", "FundosInvestimento.Application\FundosInvestimento.Application.csproj", "{A35A8F1D-9FC3-4564-ADB5-AD899E0FF5E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{55D9ABEC-489F-49CA-8A96-B2C02F4B9AF4}"
-	ProjectSection(SolutionItems) = preProject
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IAplicacaoResgateAppService.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IAplicacaoResgateAppService.cs
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IAppServiceBase.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IAppServiceBase.cs
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IFundosAppService.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\Interface\IFundosAppService.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,7 +58,6 @@ Global
 		{4642BCFB-1FD5-4EBA-B061-B77C55D05E5D} = {11A9CFDF-5AA7-486E-A1DA-47ECBAE50665}
 		{A3DEBFA5-11D9-4C45-B958-A9C0D009C488} = {E6447DB0-5281-4462-8B24-7C749C7D9D6A}
 		{A35A8F1D-9FC3-4564-ADB5-AD899E0FF5E9} = {F2EF05F8-96F4-4FB6-8F41-E14F932D13C7}
-		{55D9ABEC-489F-49CA-8A96-B2C02F4B9AF4} = {F2EF05F8-96F4-4FB6-8F41-E14F932D13C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95448CA0-42B1-4F63-99AE-E44301E3B49C}
