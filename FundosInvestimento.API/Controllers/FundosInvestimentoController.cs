@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FundosInvestimento.API.Controllers
 {
+    [Route("api/[controller]")]
     public class FundosInvestimentoController : ControllerBase
     {
         private readonly IFundosAppService _fundosApp;
@@ -20,8 +21,8 @@ namespace FundosInvestimento.API.Controllers
             _fundosApp = fundosApp;
         }
 
-        [HttpPost]
-        [Route("api/FundosInvestimento/InsereFundosInvestimento")]
+        [HttpPost("[action]")]
+        //[Route("api/FundosInvestimento/InsereFundosInvestimento")]
         public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] InsereFundosInvestimentoRequest request)
         {
             InsereFundosInvestimentoResponse response = new InsereFundosInvestimentoResponse();
@@ -35,6 +36,8 @@ namespace FundosInvestimento.API.Controllers
                 dadosfundosinvestimento.InvestimentoInicial = request.investimentoInicial;
 
                 _fundosApp.Add(dadosfundosinvestimento);
+
+                //var clienteViewModel = Mapper.Map<FundosViewModel>(Fundos)(_fundosApp.Add(dadosfundosinvestimento));
 
                 //var retorno = Mapper.Map<FundosViewModel>(Fundos);
 

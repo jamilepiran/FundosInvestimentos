@@ -37,8 +37,8 @@ namespace FundosInvestimento.API
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //Dependency Injection
             services.AddSingleton<IFundosAppService, FundosAppService>();
-            //services.AddTransient<IFundosAppService, AuthMessageSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FundosInvestimento.Domain.Entities
 {
-    public class AplicacaoResgate
+    public abstract class AplicacaoResgate
     {
         public Guid AplicacaoResgateId { get; set; }
         public TpMovimentacao TipoMovimentacao{ get; set; }
