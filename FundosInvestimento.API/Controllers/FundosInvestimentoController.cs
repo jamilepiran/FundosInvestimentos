@@ -1,51 +1,44 @@
-﻿using FundosInvestimento.API.Models;
+﻿using AutoMapper;
+using FundosInvestimento.API.Models;
+using FundosInvestimento.API.ViewModels;
 using FundosInvestimento.Application.Interface;
 using FundosInvestimento.Domain.Entities;
+using FundosInvestimento.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using AutoMapper;
-using FundosInvestimento.API.ViewModels;
-using FundosInvestimento.Domain.Interfaces.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace FundosInvestimento.API.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     public class FundosInvestimentoController : ControllerBase
     {
         private readonly IFundosAppService _fundosApp;
+        private readonly IFundosService _fundosService;
 
-        public FundosInvestimentoController(IFundosAppService fundosApp)
+        public FundosInvestimentoController(IFundosAppService fundosApp, IFundosService fundosService)
         {
             _fundosApp = fundosApp;
+            _fundosService = fundosService;
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost("[action]")]
-        //[Route("api/FundosInvestimento/InsereFundosInvestimento")]
-        public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] InsereFundosInvestimentoRequest request)
+        public InsereFundosInvestimentoResponse InsereFundosInvestimento(FundosViewModel fundos)
         {
             InsereFundosInvestimentoResponse response = new InsereFundosInvestimentoResponse();
 
             try
             {
-                Fundos dadosfundosinvestimento = new Fundos();
-
-                dadosfundosinvestimento.Nome = request.nome;
-                dadosfundosinvestimento.Cnpj = request.cnpj;
-                dadosfundosinvestimento.InvestimentoInicial = request.investimentoInicial;
-
-                _fundosApp.Add(dadosfundosinvestimento);
-
-                //var clienteViewModel = Mapper.Map<FundosViewModel>(Fundos)(_fundosApp.Add(dadosfundosinvestimento));
-
-                //var retorno = Mapper.Map<FundosViewModel>(Fundos);
-
-                //if (retorno != null)
-                //{
-                //    response.mensagem = "Fundos de Investimento inserido com sucesso!";
-                //}
-
+                if (ModelState.IsValid)
+                {
+                    var fundosDomain = Mapper.Map<FundosViewModel, Fundos>(fundos);
+                    if (_fundosApp != null)
+                    {
+                        _fundosApp.Add(fundosDomain);
+                        response.mensagem = "Fundos de Investimento inserido com sucesso!";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -55,11 +48,11 @@ namespace FundosInvestimento.API.Controllers
             return response;
         }
 
-        [HttpPost]
-        [Route("api/FundosInvestimento/ListaFundosInvestimento")]
-        public ListaFundosInvestimentoResponse ListaFundosInvestimento([FromBody] ListaFundosInvestimentoRequest request)
-        {
-            return null;
-        }
+        //[HttpPost]
+        //[Route("api/FundosInvestimento/ListaFundosInvestimento")]
+        //public ListaFundosInvestimentoResponse ListaFundosInvestimento([FromBody] ListaFundosInvestimentoRequest request)
+        //{
+        //    return null;
+        //}
     }
 }

@@ -8,15 +8,9 @@ namespace FundosInvestimento.Application
     {
         private readonly IFundosService _fundosService;
 
-        public FundosAppService(IFundosService fundosService)
-            : base(fundosService)
+        public FundosAppService(IFundosService fundosService) : base(fundosService)
         {
             _fundosService = fundosService;
         }
-
-        //public IEnumerable<Cliente> ObterClientesEspeciais()
-        //{
-        //    return _clienteService.ObterClientesEspeciais(_clienteService.GetAll());
-        //}
     }
 }

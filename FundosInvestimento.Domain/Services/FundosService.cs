@@ -10,15 +10,9 @@ namespace FundosInvestimento.Domain.Services
     {
         private readonly IFundosRepository _fundosRepository;
 
-        public FundosService(IFundosRepository fundosRepository)
-            : base(fundosRepository)
+        public FundosService(IFundosRepository fundosRepository) : base(fundosRepository)
         {
             _fundosRepository = fundosRepository;
         }
-
-        //public IEnumerable<Cliente> ObterClientesEspeciais(IEnumerable<Cliente> clientes)
-        //{
-            //return clientes.Where(c => c.ClienteEspecial(c));
-        //}
     }
 }

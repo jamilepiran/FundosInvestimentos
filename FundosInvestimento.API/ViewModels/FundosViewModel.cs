@@ -1,9 +1,8 @@
-﻿using System;
+﻿using FundosInvestimento.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using FundosInvestimento.Domain.Entities;
 
 namespace FundosInvestimento.API.ViewModels
 {
@@ -18,6 +17,8 @@ namespace FundosInvestimento.API.ViewModels
 
             [ForeignKey("FundosId")]
             public ICollection<AplicacaoResgate> AplicacaoResgate { get; set; }
+
+            public virtual IEnumerable<AplicacaoResgateViewModel> Aplicacao { get; set; }
         }
     }
 }

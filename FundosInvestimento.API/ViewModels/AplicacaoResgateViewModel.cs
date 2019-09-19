@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FundosInvestimento.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace FundosInvestimento.Domain.Entities
+namespace FundosInvestimento.API.ViewModels
 {
-    public class AplicacaoResgate
+    public class AplicacaoResgateViewModel : IdentityUser
     {
         public Guid AplicacaoResgateId { get; set; }
-        public TpMovimentacao TipoMovimentacao{ get; set; }
+        public TpMovimentacao TipoMovimentacao { get; set; }
         [ForeignKey("FundosId")]
         public Guid FundosId { get; set; }
         public string Cpf { get; set; }
@@ -16,11 +16,7 @@ namespace FundosInvestimento.Domain.Entities
         public DateTime DataMovimentacao { get; set; }
 
         public Fundos Fundos { get; set; }
-    }
 
-    public enum TpMovimentacao
-    {
-        Aplicacao,
-        Resgate
+        public virtual FundosViewModel Fundo { get; set; }
     }
 }
