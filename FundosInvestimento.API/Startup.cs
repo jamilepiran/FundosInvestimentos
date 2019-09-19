@@ -1,5 +1,9 @@
 ﻿using System.Configuration;
+using AutoMapper;
+using FundosInvestimento.API.ViewModels;
+using FundosInvestimento.Application;
 using FundosInvestimento.Application.Interface;
+using FundosInvestimento.Domain.Entities;
 using FundosInvestimento.Domain.Interfaces.Services;
 using FundosInvestimento.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Builder;
@@ -33,10 +37,23 @@ namespace FundosInvestimento.API
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddSingleton<IFundosAppService, FundosAppService>();
+            services.AddSingleton<IFundosAppService, FundosAppService>();
             //services.AddTransient<IFundosAppService, AuthMessageSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //Add framework services.
+            services.AddMvc().AddControllersAsServices();      // <---- Super important
+
+            //AutoMapper
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FundosViewModel, Fundos>();
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            //AutoMapper
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

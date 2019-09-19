@@ -2,7 +2,7 @@
 
 namespace FundosInvestimento.Application.Interface
 {
-    public interface IFundosInvestimentoAppService : IAppServiceBase<AplicacaoResgate>
+    public interface IAplicacaoResgateAppService : IAppServiceBase<AplicacaoResgate>
     {
         //IEnumerable<AplicacaoResgate> BuscarPorAplicacaoResgate(string id);
     }

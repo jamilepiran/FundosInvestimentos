@@ -6,11 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{B12A9999-2531-4E57-85AF-E7E1DCDDA024}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{F2EF05F8-96F4-4FB6-8F41-E14F932D13C7}"
-	ProjectSection(SolutionItems) = preProject
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\AplicacaoResgateAppService.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\AplicacaoResgateAppService.cs
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\AppServiceBase.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\AppServiceBase.cs
-		..\git\ProjetoTeste.Application\ProjetoTeste.Application\FundosAppService.cs = ..\git\ProjetoTeste.Application\ProjetoTeste.Application\FundosAppService.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{E6447DB0-5281-4462-8B24-7C749C7D9D6A}"
 EndProject

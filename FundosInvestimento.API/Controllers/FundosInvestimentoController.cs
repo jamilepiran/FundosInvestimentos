@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FundosInvestimento.API.Models;
+﻿using FundosInvestimento.API.Models;
 using FundosInvestimento.Application.Interface;
 using FundosInvestimento.Domain.Entities;
-using FundosInvestimento.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using AutoMapper;
+using FundosInvestimento.API.ViewModels;
+using FundosInvestimento.Domain.Interfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FundosInvestimento.API.Controllers
 {
@@ -35,11 +36,13 @@ namespace FundosInvestimento.API.Controllers
 
                 _fundosApp.Add(dadosfundosinvestimento);
 
+                //var retorno = Mapper.Map<FundosViewModel>(Fundos);
+
                 //if (retorno != null)
                 //{
                 //    response.mensagem = "Fundos de Investimento inserido com sucesso!";
                 //}
-                
+
             }
             catch (Exception ex)
             {
