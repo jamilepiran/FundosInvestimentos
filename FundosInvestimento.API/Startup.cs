@@ -63,6 +63,7 @@ namespace FundosInvestimento.API
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<FundosViewModel, Fundos>();
+                cfg.CreateMap<AplicacaoResgateViewModel, AplicacaoResgate>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);

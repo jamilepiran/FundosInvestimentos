@@ -6,25 +6,30 @@ using FundosInvestimento.Domain.Entities;
 using FundosInvestimento.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FundosInvestimento.API.Controllers
 {
-    //[Authorize]
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
+    [Authorize()]
     public class FundosInvestimentoController : ControllerBase
     {
+        //Fazer a injeção do serviço no repositório
         private readonly IFundosAppService _fundosApp;
         private readonly IFundosService _fundosService;
+        private readonly IMapper _mapper;
 
-        public FundosInvestimentoController(IFundosAppService fundosApp, IFundosService fundosService)
+        //Construtor
+        public FundosInvestimentoController(IFundosAppService fundosApp, IFundosService fundosService, IMapper mapper)
         {
             _fundosApp = fundosApp;
             _fundosService = fundosService;
+            _mapper = mapper;
         }
 
-        [ValidateAntiForgeryToken]
-        [HttpPost("[action]")]
-        public InsereFundosInvestimentoResponse InsereFundosInvestimento(FundosViewModel fundos)
+        [HttpPost("[Action]")]
+        public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] FundosViewModel fundos)
         {
             InsereFundosInvestimentoResponse response = new InsereFundosInvestimentoResponse();
 
@@ -32,7 +37,7 @@ namespace FundosInvestimento.API.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var fundosDomain = Mapper.Map<FundosViewModel, Fundos>(fundos);
+                    var fundosDomain = _mapper.Map<FundosViewModel, Fundos>(fundos);
                     if (_fundosApp != null)
                     {
                         _fundosApp.Add(fundosDomain);

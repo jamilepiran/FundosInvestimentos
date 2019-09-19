@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FundosInvestimento.API.ViewModels
 {
-    public class FundosViewModel
+    public class FundosViewModel : IdentityUser
     {
         public class Fundos
         {
