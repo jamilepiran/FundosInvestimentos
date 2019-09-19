@@ -5,6 +5,5 @@ namespace FundosInvestimento.Domain.Interfaces.Services
 {
     public interface IFundosService : IServiceBase<Fundos>
     {
-        //IEnumerable<Cliente> ObterClientesEspeciais(IEnumerable<Cliente> clientes);
     }
 }

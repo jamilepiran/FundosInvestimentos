@@ -9,15 +9,9 @@ namespace FundosInvestimento.Domain.Services
     {
         private readonly IAplicacaoResgateRepository _aplicacaoresgateRepository;
 
-        public AplicacaoResgateService(IAplicacaoResgateRepository aplicacaoresgateRepository)
-            : base(aplicacaoresgateRepository)
+        public AplicacaoResgateService(IAplicacaoResgateRepository aplicacaoresgateRepository) : base(aplicacaoresgateRepository)
         {
             _aplicacaoresgateRepository = aplicacaoresgateRepository;
         }
-
-        //public IEnumerable<Produto> BuscarPorNome(string nome)
-        //{
-            //return _produtoRepository.BuscarPorNome(nome);
-        //}
     }
 }

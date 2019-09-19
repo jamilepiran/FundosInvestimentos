@@ -5,6 +5,5 @@ namespace FundosInvestimento.Domain.Interfaces.Services
 {
     public interface IAplicacaoResgateService : IServiceBase<AplicacaoResgate>
     {
-        //IEnumerable<Produto> BuscarPorNome(string nome);
     }
 }
