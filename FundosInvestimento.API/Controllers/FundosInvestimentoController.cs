@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FundosInvestimento.API.Models;
 using FundosInvestimento.API.ViewModels;
 using FundosInvestimento.Application.Interface;
 using FundosInvestimento.Domain.Entities;
@@ -30,7 +29,7 @@ namespace FundosInvestimento.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] FundosViewModel fundos)
+        public InsereFundosInvestimentoResponse InsereFundosInvestimento([FromBody] InsereFundosInvestimentoRequest fundos)
         {
             InsereFundosInvestimentoResponse response = new InsereFundosInvestimentoResponse();
 
@@ -38,7 +37,7 @@ namespace FundosInvestimento.API.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var fundosDomain = _mapper.Map<FundosViewModel, Fundos>(fundos);
+                    var fundosDomain = _mapper.Map<InsereFundosInvestimentoRequest, Fundos>(fundos);
                     if (fundosDomain != null)
                     {
                         _fundosApp.Add(fundosDomain);

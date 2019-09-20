@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using AutoMapper;
-using FundosInvestimento.API.Models;
 using FundosInvestimento.API.ViewModels;
 using FundosInvestimento.Application;
 using FundosInvestimento.Application.Interface;
@@ -59,8 +58,9 @@ namespace FundosInvestimento.API
             //AutoMapper
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<FundosViewModel, Fundos>();
-                cfg.CreateMap<AplicacaoResgateViewModel, AplicacaoResgate>();
+                cfg.CreateMap<InsereFundosInvestimentoRequest, Fundos>();
+                cfg.CreateMap<InsereFundosInvestimentoResponse, Fundos>();
+                //cfg.CreateMap<AplicacaoResgateViewModel, AplicacaoResgate>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);

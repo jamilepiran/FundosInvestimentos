@@ -17,6 +17,6 @@ namespace FundosInvestimento.API.ViewModels
 
         public Fundos Fundos { get; set; }
 
-        public virtual FundosViewModel Fundo { get; set; }
+        public virtual InsereFundosInvestimentoRequest Fundo { get; set; }
     }
 }
