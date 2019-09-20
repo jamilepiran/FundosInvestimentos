@@ -2,8 +2,8 @@ version: '3.3'
 
 services:
   FundosInvestimento.API:
-    image: fundosinvestimento-release
-    container_name: fundosinvestimento-release
+    image: fundosinvestimento
+    container_name: fundosinvestimento
     restart: unless-stopped
     build:
       context: .
