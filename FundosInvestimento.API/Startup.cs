@@ -36,22 +36,14 @@ namespace FundosInvestimento.API
             services.AddDbContext<FundosInvestimentoContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             //Dependency Injection
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IFundosAppService, FundosAppService>();
-            services.AddSingleton<IFundosService, FundosService>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IFundosAppService, FundosAppService>();
+            services.AddScoped<IFundosService, FundosService>();
             services.AddTransient<IFundosRepository, FundosRepository>();
 
-            services.AddSingleton<IAplicacaoResgateAppService, AplicacaoResgateAppService>();
-            services.AddSingleton<IAplicacaoResgateService, AplicacaoResgateService>();
+            services.AddScoped<IAplicacaoResgateAppService, AplicacaoResgateAppService>();
+            services.AddScoped<IAplicacaoResgateService, AplicacaoResgateService>();
             services.AddTransient<IAplicacaoResgateRepository, AplicacaoResgateRepository>();
-
-            //services.AddIdentity<FundosViewModel, IdentityRole>()
-            //    .AddEntityFrameworkStores<FundosInvestimentoContext>()
-            //    .AddDefaultTokenProviders();
-
-            //services.AddIdentity<AplicacaoResgateViewModel, IdentityRole>()
-            //    .AddEntityFrameworkStores<FundosInvestimentoContext>()
-            //    .AddDefaultTokenProviders();
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger
             services.AddSwaggerGen(c =>
@@ -65,7 +57,6 @@ namespace FundosInvestimento.API
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //AutoMapper
-
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<FundosViewModel, Fundos>();

@@ -9,15 +9,9 @@ namespace FundosInvestimento.Application
     {
         private readonly IAplicacaoResgateService _aplicacaoresgateService;
 
-        public AplicacaoResgateAppService(IAplicacaoResgateService aplicacaoresgateService)
-            : base(aplicacaoresgateService)
+        public AplicacaoResgateAppService(IAplicacaoResgateService aplicacaoresgateService) : base(aplicacaoresgateService)
         {
             _aplicacaoresgateService = aplicacaoresgateService;
         }
-
-        //public IEnumerable<Produto> BuscarPorNome(string nome)
-        //{
-        //    return _produtoService.BuscarPorNome(nome);
-        //}
     }
 }
