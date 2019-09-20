@@ -17,14 +17,14 @@ namespace FundosInvestimento.API.Controllers
     {
         //Fazer a injeção do serviço no repositório
         private readonly IFundosAppService _fundosApp;
-        private readonly IFundosService _fundosService;
+        private readonly IAplicacaoResgateAppService _movimentacaoApp;
         private readonly IMapper _mapper;
 
         //Construtor
-        public FundosInvestimentoController(IFundosAppService fundosApp, IFundosService fundosService, IMapper mapper)
+        public FundosInvestimentoController(IFundosAppService fundosApp, IAplicacaoResgateAppService movimentacaoApp, IMapper mapper)
         {
             _fundosApp = fundosApp;
-            _fundosService = fundosService;
+            _movimentacaoApp = movimentacaoApp;
             _mapper = mapper;
         }
 
@@ -42,6 +42,31 @@ namespace FundosInvestimento.API.Controllers
                     {
                         _fundosApp.Add(fundosDomain);
                         response.mensagem = "Fundos de Investimento inserido com sucesso!";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.mensagem = "Erro: " + ex;
+                return response;
+            }
+            return response;
+        }
+
+        [HttpPost("[action]")]
+        public InsereMovimentacaoInvestimentoResponse InsereMovimentacaoInvestimento([FromBody] InsereMovimentacaoInvestimentoRequest movimentacao)
+        {
+            InsereMovimentacaoInvestimentoResponse response = new InsereMovimentacaoInvestimentoResponse();
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var aplicacaoresgateDomain = _mapper.Map<InsereMovimentacaoInvestimentoRequest, AplicacaoResgate>(movimentacao);
+                    if (aplicacaoresgateDomain != null)
+                    {
+                        _movimentacaoApp.Add(aplicacaoresgateDomain);
+                        response.mensagem = "Movimentação inserida com sucesso!";
                     }
                 }
             }

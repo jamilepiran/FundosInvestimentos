@@ -60,7 +60,8 @@ namespace FundosInvestimento.API
             {
                 cfg.CreateMap<InsereFundosInvestimentoRequest, Fundos>();
                 cfg.CreateMap<InsereFundosInvestimentoResponse, Fundos>();
-                //cfg.CreateMap<AplicacaoResgateViewModel, AplicacaoResgate>();
+                cfg.CreateMap<InsereMovimentacaoInvestimentoRequest, AplicacaoResgate>();
+                cfg.CreateMap<InsereMovimentacaoInvestimentoResponse, AplicacaoResgate>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
