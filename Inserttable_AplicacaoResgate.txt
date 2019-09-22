@@ -1,0 +1,32 @@
+insert into [AplicacaoResgate] ([AplicacaoResgateId], [TipoMovimentacao], [FundosId], [Cpf], [ValorMovimentacao], [DataMovimentacao])
+values('46d8ab44-d57e-48db-864d-9aada46d9f61','0','7bc7eb92-b897-4810-981a-08d73f6ff65f','09533372788','1000.00','2019-09-20');
+
+insert into [AplicacaoResgate] ([AplicacaoResgateId], [TipoMovimentacao], [FundosId], [Cpf], [ValorMovimentacao], [DataMovimentacao])
+values('90db75dd-faf4-457e-b8bb-61ba15e92ff3','0','c2204dcd-87cd-43c6-981b-08d73f6ff65f','09533372788','1000.00','2019-09-20');
+
+insert into [AplicacaoResgate] ([AplicacaoResgateId], [TipoMovimentacao], [FundosId], [Cpf], [ValorMovimentacao], [DataMovimentacao])
+values('1fc710af-53a0-4b74-b69a-5ec29773d510','1','a4014cf5-1f74-420a-981c-08d73f6ff65f','09533372788','2000.00','2019-09-20');
+
+insert into [AplicacaoResgate] ([AplicacaoResgateId], [TipoMovimentacao], [FundosId], [Cpf], [ValorMovimentacao], [DataMovimentacao])
+values('955decf7-2a7e-4627-939b-1899ba807f66','1','1ea4fc36-8935-4eba-981d-08d73f6ff65f','09533372788','100.00','2019-09-20');
+
+insert into [AplicacaoResgate] ([AplicacaoResgateId], [TipoMovimentacao], [FundosId], [Cpf], [ValorMovimentacao], [DataMovimentacao])
+values('fa443279-29c4-4567-b640-19388530af46','0','cf376a3e-428c-4147-981e-08d73f6ff65f','09533372788','5000.00','2019-09-20');
+
+
+
+INSERT INTO [Fundos] ([FundosId], [Nome], [Cnpj], [InvestimentoInicial]) 
+VALUES ('7bc7eb92-b897-4810-981a-08d73f6ff65f', 'ALASKA BLACK FIC FIA II BDR - NÍVEL I', '26648868000196', 1000.00)
+
+INSERT INTO [Fundos] ([FundosId], [Nome], [Cnpj], [InvestimentoInicial]) 
+VALUES ('c2204dcd-87cd-43c6-981b-08d73f6ff65f', 'ALASKA BLACK INSTITUCIONAL FIA', '26673556000132', 1000.00)
+
+INSERT INTO [Fundos] ([FundosId], [Nome], [Cnpj], [InvestimentoInicial]) 
+VALUES ('a4014cf5-1f74-420a-981c-08d73f6ff65f', 'ARGUCIA INCOME FIA', '07670115000132', 10000.00)
+
+INSERT INTO [Fundos] ([FundosId], [Nome], [Cnpj], [InvestimentoInicial]) 
+VALUES ('1ea4fc36-8935-4eba-981d-08d73f6ff65f', 'ARX INCOME FIA', '03168062000103', 500.00)
+
+INSERT INTO [Fundos] ([FundosId], [Nome], [Cnpj], [InvestimentoInicial]) 
+VALUES ('cf376a3e-428c-4147-981e-08d73f6ff65f', 'ARX LONG TERM FIC FIA', '10237480000162', 5000.00)
+

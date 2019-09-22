@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using FundosInvestimento.Domain.Entities;
 using FundosInvestimento.Infra.Data.EntityConfig;
@@ -23,14 +24,10 @@ namespace FundosInvestimento.Infra.Data.Contexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //This will singularize all table names
-            foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
-            {
-                entityType.Relational().TableName = entityType.DisplayName();
-            }
+            //Since EF Core 2.2, this will apply configs from separate classes which implemented IEntityTypeConfiguration<T>
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.ForSqlServerUseIdentityColumns();
-            modelBuilder.HasDefaultSchema("FundosInvestimento");
 
             //Mapeando as classes
             modelBuilder.ApplyConfiguration(new FundosConfiguration());

@@ -81,9 +81,7 @@ namespace FundosInvestimento.API.Controllers
         [HttpGet("[action]")]
         public IEnumerable<ListaFundosInvestimentoResponse> ListaFundosInvestimento()
         {
-           
-           var listafundos = _mapper.Map<ICollection<Fundos>, ICollection<ListaFundosInvestimentoResponse>>(_fundosApp.GetAll());
-           return listafundos;
+            return _mapper.Map<IEnumerable<Fundos>, IEnumerable<ListaFundosInvestimentoResponse>>(_fundosApp.GetAll());
         }
     }
 }

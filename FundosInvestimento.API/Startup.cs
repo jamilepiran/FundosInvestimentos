@@ -35,11 +35,11 @@ namespace FundosInvestimento.API
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IFundosAppService, FundosAppService>();
             services.AddScoped<IFundosService, FundosService>();
-            services.AddTransient<IFundosRepository, FundosRepository>();
+            services.AddScoped<IFundosRepository, FundosRepository>();
 
             services.AddScoped<IAplicacaoResgateAppService, AplicacaoResgateAppService>();
             services.AddScoped<IAplicacaoResgateService, AplicacaoResgateService>();
-            services.AddTransient<IAplicacaoResgateRepository, AplicacaoResgateRepository>();
+            services.AddScoped<IAplicacaoResgateRepository, AplicacaoResgateRepository>();
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger
             services.AddSwaggerGen(c =>
@@ -47,10 +47,7 @@ namespace FundosInvestimento.API
                 c.SwaggerDoc("v1", new Info { Title = "FundosInvestimento", Version = "v1" });
             });
 
-            services.AddMvcCore()
-                    .AddApiExplorer()
-                    .AddJsonFormatters()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvcCore().AddApiExplorer().AddJsonFormatters().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //AutoMapper
             var config = new AutoMapper.MapperConfiguration(cfg =>
@@ -59,7 +56,11 @@ namespace FundosInvestimento.API
                 cfg.CreateMap<InsereFundosInvestimentoResponse, Fundos>();
                 cfg.CreateMap<InsereMovimentacaoInvestimentoRequest, AplicacaoResgate>();
                 cfg.CreateMap<InsereMovimentacaoInvestimentoResponse, AplicacaoResgate>();
-                cfg.CreateMap<ListaFundosInvestimentoResponse, Fundos>();
+                cfg.CreateMap<Fundos, ListaFundosInvestimentoResponse>();
+                //cfg.CreateMap<ListaFundosInvestimentoResponse, Fundos>();
+                //cfg.CreateMap<AplicacaoResgate, ListaFundosInvestimentoResponse>();
+                //cfg.CreateMap<ListaFundosInvestimentoResponse, AplicacaoResgate>();
+                //cfg.CreateMap<Fundos, ListaFundosInvestimentoItemResponse>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
@@ -82,6 +83,7 @@ namespace FundosInvestimento.API
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FundosInvestimento V1");
             });
+            app.UseMvc();
         }
     }
 }

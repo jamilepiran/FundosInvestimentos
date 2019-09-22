@@ -15,6 +15,6 @@ namespace FundosInvestimento.Domain.Entities
         public decimal InvestimentoInicial { get; set; }
 
         [ForeignKey("FundosId")]
-        public ICollection<AplicacaoResgate> AplicacaoResgate { get; set; }
+        public virtual ICollection<AplicacaoResgate> AplicacaoResgate { get; set; } = new HashSet<AplicacaoResgate>();
     }
 }
