@@ -36,8 +36,7 @@ namespace FundosInvestimento.Infra.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<Guid>("FundosId")
-                        .HasColumnName("FundosId")
-                        .HasMaxLength(100);
+                        .HasColumnName("FundosId");
 
                     b.Property<string>("TipoMovimentacao")
                         .IsRequired()

@@ -14,7 +14,7 @@ namespace FundosInvestimento.Infra.Data.EntityConfig
             builder.HasKey(r => r.AplicacaoResgateId).HasName("AplicacaoResgateId");
             builder.Property(r => r.AplicacaoResgateId).HasColumnName("AplicacaoResgateId").ValueGeneratedOnAdd();
             builder.Property(r => r.TipoMovimentacao).HasColumnName("TipoMovimentacao").HasColumnType("varchar(1)").HasConversion(v => v.ToString(), v => (TpMovimentacao)Enum.Parse(typeof(TpMovimentacao), v));
-            builder.Property(r => r.FundosId).HasColumnName("FundosId").HasMaxLength(100);
+            builder.Property(r => r.FundosId).HasColumnName("FundosId");
             builder.Property(r => r.Cpf).HasColumnName("Cpf").HasColumnType("varchar(11)").HasMaxLength(11);
             builder.Property(r => r.ValorMovimentacao).HasColumnName("ValorMovimentacao").HasColumnType("decimal(18,2)");
             builder.Property(r => r.DataMovimentacao).HasColumnName("DataMovimentacao").HasColumnType("datetime");

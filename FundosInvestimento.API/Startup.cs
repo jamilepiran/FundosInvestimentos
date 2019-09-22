@@ -1,6 +1,5 @@
-﻿using System.Configuration;
-using AutoMapper;
-using FundosInvestimento.API.ViewModels;
+﻿using AutoMapper;
+using FundosInvestimento.API.Models;
 using FundosInvestimento.Application;
 using FundosInvestimento.Application.Interface;
 using FundosInvestimento.Domain.Entities;
@@ -11,8 +10,6 @@ using FundosInvestimento.Infra.Data.Contexto;
 using FundosInvestimento.Infra.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -62,6 +59,7 @@ namespace FundosInvestimento.API
                 cfg.CreateMap<InsereFundosInvestimentoResponse, Fundos>();
                 cfg.CreateMap<InsereMovimentacaoInvestimentoRequest, AplicacaoResgate>();
                 cfg.CreateMap<InsereMovimentacaoInvestimentoResponse, AplicacaoResgate>();
+                cfg.CreateMap<ListaFundosInvestimentoResponse, Fundos>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);

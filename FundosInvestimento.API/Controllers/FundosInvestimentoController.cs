@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FundosInvestimento.API.ViewModels;
+using FundosInvestimento.API.Models;
 using FundosInvestimento.Application.Interface;
 using FundosInvestimento.Domain.Entities;
 using FundosInvestimento.Domain.Interfaces.Services;
@@ -78,11 +78,12 @@ namespace FundosInvestimento.API.Controllers
             return response;
         }
 
-        //[HttpPost]
-        //[Route("api/FundosInvestimento/ListaFundosInvestimento")]
-        //public ListaFundosInvestimentoResponse ListaFundosInvestimento([FromBody] ListaFundosInvestimentoRequest request)
-        //{
-        //    return null;
-        //}
+        [HttpGet("[action]")]
+        public IEnumerable<ListaFundosInvestimentoResponse> ListaFundosInvestimento()
+        {
+           
+           var listafundos = _mapper.Map<ICollection<Fundos>, ICollection<ListaFundosInvestimentoResponse>>(_fundosApp.GetAll());
+           return listafundos;
+        }
     }
 }

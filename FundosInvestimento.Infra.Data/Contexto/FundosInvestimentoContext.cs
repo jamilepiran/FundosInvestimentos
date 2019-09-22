@@ -5,6 +5,8 @@ using FundosInvestimento.Domain.Entities;
 using FundosInvestimento.Infra.Data.EntityConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NJsonSchema.Infrastructure;
 
 namespace FundosInvestimento.Infra.Data.Contexto
@@ -21,6 +23,12 @@ namespace FundosInvestimento.Infra.Data.Contexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //This will singularize all table names
+            foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                entityType.Relational().TableName = entityType.DisplayName();
+            }
+
             modelBuilder.ForSqlServerUseIdentityColumns();
             modelBuilder.HasDefaultSchema("FundosInvestimento");
 
