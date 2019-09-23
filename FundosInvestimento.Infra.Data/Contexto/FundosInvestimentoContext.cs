@@ -25,7 +25,7 @@ namespace FundosInvestimento.Infra.Data.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Since EF Core 2.2, this will apply configs from separate classes which implemented IEntityTypeConfiguration<T>
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.ForSqlServerUseIdentityColumns();
 

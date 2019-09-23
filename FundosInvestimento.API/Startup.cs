@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using FundosInvestimento.API.Models;
 using FundosInvestimento.Application;
 using FundosInvestimento.Application.Interface;
@@ -52,15 +53,10 @@ namespace FundosInvestimento.API
             //AutoMapper
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<InsereFundosInvestimentoRequest, Fundos>();
-                cfg.CreateMap<InsereFundosInvestimentoResponse, Fundos>();
-                cfg.CreateMap<InsereMovimentacaoInvestimentoRequest, AplicacaoResgate>();
-                cfg.CreateMap<InsereMovimentacaoInvestimentoResponse, AplicacaoResgate>();
-                cfg.CreateMap<Fundos, ListaFundosInvestimentoResponse>();
-                //cfg.CreateMap<ListaFundosInvestimentoResponse, Fundos>();
-                //cfg.CreateMap<AplicacaoResgate, ListaFundosInvestimentoResponse>();
-                //cfg.CreateMap<ListaFundosInvestimentoResponse, AplicacaoResgate>();
-                //cfg.CreateMap<Fundos, ListaFundosInvestimentoItemResponse>();
+                cfg.CreateMap<FundosInvestimentoModel, Fundos>();
+                cfg.CreateMap<AplicacaoResgateModel, AplicacaoResgate>();
+                cfg.CreateMap<Fundos, FundosInvestimentoModel>();
+                cfg.CreateMap<AplicacaoResgate, AplicacaoResgateModel>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
